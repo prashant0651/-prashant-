@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prashant Kumar - Futuristic Portfolio</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 3em;
+            color: #00d4ff;
+            text-shadow: 0 0 10px #00d4ff;
+            animation: glow 2s ease-in-out infinite alternate, float 3s ease-in-out infinite;
+            position: relative;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00d4ff; }
+            to { text-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        h2 {
+            color: #00d4ff;
+            border-bottom: 2px solid #00d4ff;
+            padding-bottom: 10px;
+            animation: slideIn 1s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        p {
+            line-height: 1.6;
+            text-align: center;
+            animation: fadeIn 2s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: bounceIn 1.5s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #00d4ff;
+            box-shadow: 0 0 20px #00d4ff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: rotateGlow 4s linear infinite;
+            cursor: pointer;
+            object-fit: cover;
+        }
+        @keyframes rotateGlow {
+            0% { box-shadow: 0 0 20px #00d4ff; }
+            50% { box-shadow: 0 0 30px #00d4ff, 0 0 40px #00d4ff; }
+            100% { box-shadow: 0 0 20px #00d4ff; }
+        }
+        .profile img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 30px #00d4ff;
+        }
+        .profile input[type="file"] {
+            display: none;
+        }
+        /* Typing Effect for Name */
+        .typing {
+            overflow: hidden;
+            border-right: 2px solid #00d4ff;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00d4ff; }
+        }
+        /* Sections */
+        .section {
+            margin-bottom: 50px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideUp 1s ease-out forwards;
+        }
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section:hover {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            transform: translateY(-5px);
+        }
+        .skills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .skill {
+            background: #00d4ff;
+            color: #000;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .skill:hover {
+            background: #0099cc;
+            transform: scale(1.1);
+        }
+        .contact a {
+            color: #00d4ff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            position: relative;
+        }
+        .contact a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: #00d4ff;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        .contact a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        .contact a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+        .download-btn {
+            display: inline-block;
+            background: #00d4ff;
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { box-shadow: 0 0 10px #00d4ff; }
+            50% { box-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff; }
+            100% { box-shadow: 0 0 10px #00d4ff; }
+        }
+        .download-btn:hover {
+            background: #0099cc;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #00d4ff;
+        }
+        /* Particles Effect */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .particle {
+            position: absolute;
+            background: #00d4ff;
+            border-radius: 50%;
+            animation: drift 10s linear infinite;
+        }
+        @keyframes drift {
+            from { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            to { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .profile img { width: 120px; height: 120px; }
+            .skills { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="container">
+        <!-- Profile Section -->
+        <div class="profile">
+            <img src="https://via.placeholder.com/150" alt="Prashant Kumar" id="profile-pic">
+            <input type="file" id="photo-upload" accept="image/*">
+            <h1 class="typing">Prashant Kumar</h1>
+        </div>
+
+        <!-- About Me -->
+        <div class="section" id="about">
+            <h2>About Me</h2>
+            <p>I am Prashant Kumar, a passionate Python expert with strong proficiency in Java, CSS, and C++. I am also a NEET aspirant who is equally dedicated to academics and technology. My goal is to merge my technical knowledge and medical passion to contribute meaningfully to the future of AI and healthcare.</p>
+        </div>
+
+        <!-- Skills & Expertise -->
+        <div class="section" id="skills">
+            <h2>Skills & Expertise</h2>
+            <div class="skills">
+                <div class="skill">Python</div>
+                <div class="skill">Java</div>
+                <div class="skill">CSS</div>
+                <div class="skill">C++</div>
+                <div class="skill">AI & Healthcare Integration</div>
+            </div>
+        </div>
+
+        <!-- Projects / Achievements -->
+        <div class="section" id="projects">
+            <h2>Projects / Achievements</h2>
+            <p>Developed a Python-based AI model for medical diagnostics. Achieved top 10% in coding competitions. Contributed to open-source projects in healthcare tech.</p>
+        </div>
+
+        <!-- Education / NEET Journey -->
+        <div class="section" id="education">
+            <h2>Education / NEET Journey</h2>
+            <p>Pursuing NEET preparation while honing technical skills. Completed high school with a focus on science and technology. Aspiring to blend medicine and AI for innovative solutions.</p>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="section contact" id="contact">
+            <h2>Contact Information</h2>
+            <p>Email: <a href="mailto:prashantkumarsingh065@gmail.com">prashantkumarsingh065@gmail.com</a></p>
+            <p>Phone: <a href="tel:+917067185187">+91 7067185187</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/o_o.prashantkumarsingh.o_o?igsh=em9tN3dlMGhwcDJ1" target="_blank">Follow me</a></p>
+            <p>Facebook: <a href="https://www.facebook.com/share/19zzvBqzdn/" target="_blank">Connect with me</a></p>
+            <a href="resume.pdf" class="download-btn" download>Download Resume</a>
+        </div>
+    </div>
+
+    <script>
+        // Particles Effect
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 5 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        createParticles(import pandas as pd
+from cryptography.fernet import Fernet
+import json
+import os
+
+class BioDataLogistics:
+    def __init__(self, encryption_key=None):
+        # Generate or use a provided encryption key
+        if encryption_key is None:
+            self.key = Fernet.generate_key()
+        else:
+            self.key = encryption_key
+        self.cipher = Fernet(self.key)
+        self.data = pd.DataFrame()  # Holds the biodata
+
+    def add_biodata(self, new_data):
+        """
+        Add biodata to the system. Expects a dict or list of dicts with columns like:
+        {'PatientID': int, 'Date': str, 'Biomarker': str, 'Value': float}
+        """
+        if isinstance(new_data, dict):
+            new_data = [new_data]
+        df_new = pd.DataFrame(new_data)
+        self.data = pd.concat([self.data, df_new], ignore_index=True)
+
+    def generate_pivot_chart(self, values, index, columns, aggfunc='mean'):
+        """
+        Create a pivot table (chart) from the data.
+        - values: Column to aggregate (e.g., 'Value')
+        - index: Row index (e.g., 'PatientID')
+        - columns: Column headers (e.g., 'Biomarker')
+        - aggfunc: Aggregation function (e.g., 'mean', 'sum')
+        Returns a DataFrame pivot table.
+        """
+        if self.data.empty:
+            raise ValueError("No biodata available to pivot.")
+        pivot = pd.pivot_table(self.data, values=values, index=index, columns=columns, aggfunc=aggfunc, fill_value=0)
+        return pivot
+
+    def encrypt_data(self, data_to_encrypt):
+        """
+        Encrypt data (e.g., a pivot table as JSON string).
+        Returns encrypted bytes.
+        """
+        data_str = json.dumps(data_to_encrypt.to_dict() if isinstance(data_to_encrypt, pd.DataFrame) else data_to_encrypt)
+        encrypted = self.cipher.encrypt(data_str.encode())
+        return encrypted
+
+    def decrypt_data(self, encrypted_data):
+        """
+        Decrypt data back to original form (e.g., dict for pivot table).
+        Returns the decrypted dict.
+        """
+        decrypted = self.cipher.decrypt(encrypted_data).decode()
+        return json.loads(decrypted)
+
+    def export_encrypted_pivot(self, filename, values, index, columns, aggfunc='mean'):
+        """
+        Generate a pivot, encrypt it, and save to file.
+        """
+        pivot = self.generate_pivot_chart(values, index, columns, aggfunc)
+        encrypted = self.encrypt_data(pivot)
+        with open(filename, 'wb') as f:
+            f.write(encrypted)
+        print(f"Encrypted pivot saved to {filename}")
+
+    def import_and_decrypt_pivot(self, filename):
+        """
+        Load encrypted pivot from file and decrypt it.
+        Returns the pivot DataFrame.
+        """
+        if not os.path.exists(filename):
+            raise FileNotFoundError(f"File {filename} not found.")
+        with open(filename, 'rb') as f:
+            encrypted = f.read()
+        decrypted_dict = self.decrypt_data(encrypted)
+        return pd.DataFrame(decrypted_dict)
+
+# Example Usage
+if __name__ == "__main__":
+    # Initialize the system
+    logistics = BioDataLogistics()
+    
+    # Add sample biodata (e.g., patient biomarkers)
+    sample_data = [
+        {'PatientID': 1, 'Date': '2023-01-01', 'Biomarker': 'Glucose', 'Value': 90.0},
+        {'PatientID': 1, 'Date': '2023-01-01', 'Biomarker': 'Cholesterol', 'Value': 200.0},
+        {'PatientID': 2, 'Date': '2023-01-01', 'Biomarker': 'Glucose', 'Value': 85.0},
+        {'PatientID': 2, 'Date': '2023-01-02', 'Biomarker': 'Glucose', 'Value': 88.0},
+    ]
+    logistics.add_biodata(sample_data)
+    
+    # Generate a pivot chart (e.g., average values by patient and biomarker)
+    pivot = logistics.generate_pivot_chart(values='Value', index='PatientID', columns='Biomarker', aggfunc='mean')
+    print("Generated Pivot Chart:")
+    print(pivot)
+    
+    # Encrypt and export the pivot
+    logistics.export_encrypted_pivot('encrypted_biodata_pivot.enc', values='Value', index='PatientID', columns='Biomarker')
+    
+    # Later, import and decrypt
+    decrypted_pivot = logistics.import_and_decrypt_pivot('encrypted_biodata_pivot.enc')
+    print("\nDecrypted Pivot Chart:")
+    print(decrypted_pivot)
+);
+
+        // Photo Upload Functionality
+        const profilePic = document.getElementById('profile-pic');
+        const photoUpload = document.getElementById('photo-upload');
+
+        profilePic.addEventListener('click', function() {
+            photoUpload.click();
+        });
+
+        photoUpload.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePic.src = e.AT_TARGET ;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Scroll-triggered animations
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            section.style.animationPlayState = 'paused';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
